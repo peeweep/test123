@@ -24,10 +24,31 @@ jobs:
   run-matrix:
     needs: nvcmp
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include: [
+          {
+            "package": "app-editors/cursor",
+            "newver": "7.36.11",
+            "oldver": null,
+            "delta": "added"
+          },
+          {
+            "package": "x11-wm/hypr",
+            "newver": "1.1.4",
+            "oldver": null,
+            "delta": "added"
+          }
+        ]
     steps:
-    - name: run
-      run: |
-        echo ${{ fromJson(needs.nvcmp.outputs.nvcmp) }}
-        echo ${{ needs.nvcmp.outputs.nvcmp }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Process package
+        run: |
+          echo "Processing package ${{ matrix.package }}"
+          echo "New version: ${{ matrix.newver }}"
+          echo "Old version: ${{ matrix.oldver }}"
+          echo "Delta: ${{ matrix.delta }}"
 
 
