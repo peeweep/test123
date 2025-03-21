@@ -1,0 +1,17 @@
+[__config__]
+oldver = "old_ver.json"
+newver = "new_ver.json"
+
+
+# curl https://www.feishu.cn/api/downloads | jq --raw-output '.versions.Linux_deb_x64.version_number'
+["app-editors/cursor"]
+source = "jq"
+url = "https://www.feishu.cn/api/downloads"
+filter = '.versions.Linux_deb_x64.version_number'
+prefix = "Linux-x64-deb@V"
+
+["x11-wm/hypr"]
+source = "github"
+github = "hyprwm/Hypr"
+use_latest_release = true
+github_account = "Goldsrc233"

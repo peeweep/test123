@@ -8,15 +8,17 @@ jobs:
   nvcmp:
     runs-on: ubuntu-latest
     outputs:
-      mymatrix: ${{ steps.nvcmp.outputs.myoutput }}
+      nvcmp: ${{ steps.nvchecker.outputs.nvcmp }}
 
     steps:
     - name: checkout
       uses: actions/checkout@v4
 
     - name: nvcmp
-      id: nvcmp
+      id: nvchecker
       run: |
+        pip install nvchecker
+        echo "nvcmp=$(nvcmp --file overlay.toml --json --newer)" >> $GITHUB_OUTPUT
         echo "myoutput=$(cat ./nvcmp.json)" >> $GITHUB_OUTPUT
         echo ${{ steps.nvcmp.outputs.myoutput }}
 
@@ -26,7 +28,7 @@ jobs:
     steps:
     - name: run
       run: |
-        echo ${{ fromJson(needs.nvcmp.outputs.mymatrix) }}
-        echo ${{ needs.nvcmp.outputs.mymatrix }}
+        echo ${{ fromJson(needs.nvcmp.outputs.nvcmp) }}
+        echo ${{ needs.nvcmp.outputs.nvcmp }}
 
 
