@@ -22,10 +22,9 @@ jobs:
   run-matrix:
     needs: nvcmp
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJson(needs.nvcmp.outputs.mymatrix) }}
     steps:
     - name: run
       run: |
-        echo ${{matrix.name}}
+        echo ${{ fromJson(needs.nvcmp.outputs.mymatrix) }}
+
 
