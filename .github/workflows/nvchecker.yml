@@ -1,0 +1,28 @@
+name: nvchecker
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  nvcmp:
+    runs-on: ubuntu-latest
+    outputs:
+      mymatrix: ${{ steps.nvcmp.outputs.myoutput }}
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: nvcmp
+      id: nvcmp
+      run: |
+        echo "myoutput=$(cat ./nvcmp.json)" >> $GITHUB_OUTPUT
+
+  run-matrix:
+    needs: nvcmp
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.nvcmp.outputs.mymatrix) }}
+    steps:
+      - run: echo ${{matrix.name}}
