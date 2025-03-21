@@ -36,5 +36,5 @@ jobs:
           echo "New version: ${{ matrix.newver }}"
           echo "Old version: ${{ matrix.oldver }}"
           echo "Delta: ${{ matrix.delta }}"
-
+          echo "Matrix: ${{ matrix }}"
 
