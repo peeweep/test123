@@ -18,6 +18,7 @@ jobs:
       id: nvcmp
       run: |
         echo "myoutput=$(cat ./nvcmp.json)" >> $GITHUB_OUTPUT
+        echo ${{ steps.nvcmp.outputs.myoutput }}
 
   run-matrix:
     needs: nvcmp
