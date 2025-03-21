@@ -18,7 +18,7 @@ jobs:
       id: nvchecker
       run: |
         pip install nvchecker
-        echo "nvcmp=$(nvcmp --file overlay.toml --json --newer | jq 'map({name, newver, oldver, delta})' | jq -c .)" >> $GITHUB_OUTPUT
+        echo "nvcmp=$(nvcmp --file overlay.toml --json --newer | jq 'map({name, newver, oldver})' | jq -c .)" >> $GITHUB_OUTPUT
 
   run-matrix:
     needs: nvcmp
@@ -35,7 +35,6 @@ jobs:
           name: ${{ matrix.name }}
           newver: ${{ matrix.newver }}
           oldver: ${{ matrix.oldver }}
-          delta: ${{ matrix.delta }}
         run: |
           echo "Processing package $name"
 
