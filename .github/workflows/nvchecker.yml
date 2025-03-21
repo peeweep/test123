@@ -25,14 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include: ${{ needs.nvcmp.outputs.nvcmp }}
+        include: ${{ fromJson(needs.nvcmp.outputs.nvcmp) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Process package
         run: |
-          echo "Processing package ${{ matrix.package }}"
+          echo "Processing package ${{ matrix.name }}"
           echo "New version: ${{ matrix.newver }}"
           echo "Old version: ${{ matrix.oldver }}"
           echo "Delta: ${{ matrix.delta }}"
