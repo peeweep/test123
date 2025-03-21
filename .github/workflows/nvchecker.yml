@@ -26,20 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include: [
-          {
-            "package": "app-editors/cursor",
-            "newver": "7.36.11",
-            "oldver": null,
-            "delta": "added"
-          },
-          {
-            "package": "x11-wm/hypr",
-            "newver": "1.1.4",
-            "oldver": null,
-            "delta": "added"
-          }
-        ]
+        include: ${{ needs.nvcmp.outputs.nvcmp }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
