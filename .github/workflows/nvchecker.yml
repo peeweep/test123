@@ -26,5 +26,6 @@ jobs:
     - name: run
       run: |
         echo ${{ fromJson(needs.nvcmp.outputs.mymatrix) }}
+        echo ${{ needs.nvcmp.outputs.mymatrix }}
 
 
