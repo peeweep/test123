@@ -24,3 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.nvcmp.outputs.mymatrix) }}
+    steps:
+    - name: run
+      run: |
+        echo ${{matrix.name}}
+
