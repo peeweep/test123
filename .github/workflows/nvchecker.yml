@@ -31,10 +31,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Process package
+        env:
+          name: ${{ matrix.name }}
+          newver: ${{ matrix.newver }}
+          oldver: ${{ matrix.oldver }}
+          delta: ${{ matrix.delta }}
         run: |
-          echo "Processing package ${{ matrix.name }}"
-          echo "New version: ${{ matrix.newver }}"
-          echo "Old version: ${{ matrix.oldver }}"
-          echo "Delta: ${{ matrix.delta }}"
-          echo "Matrix: ${{ matrix }}"
+          echo "Processing package $name"
 
